@@ -471,7 +471,7 @@ export async function renderAppPage(container: HTMLElement) {
         if (!chat) return;
         const formattedChat = `Chat: ${chat.title}
 
-${chat.messages.map(msg => `${msg.sender === 'user' ? 'You' : 'LegalAI'}:
+${chat.messages.map(msg => `${msg.sender === 'user' ? 'You' : 'Justor AI'}:
 ${msg.content}`).join('\n\n')}`;
         navigator.clipboard.writeText(formattedChat).then(() => {
             const originalContent = button.innerHTML;
@@ -499,10 +499,24 @@ ${msg.content}`).join('\n\n')}`;
     async function handleFormSubmit() {
         const userInput = messageInput.value.trim();
         if (!userInput) return;
+        
+        // Disable input and button while processing
+        const sendButton = document.getElementById('send-button') as HTMLButtonElement;
+        const originalButtonContent = sendButton.innerHTML;
+        sendButton.innerHTML = `<svg class="spinner" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>`;
+        sendButton.disabled = true;
+        messageInput.disabled = true;
+        
         if (!appState.activeChatId) await createNewChat();
 
         const activeChat = getActiveChat();
-        if (!activeChat) return;
+        if (!activeChat) {
+            // Reset UI on error
+            sendButton.innerHTML = originalButtonContent;
+            sendButton.disabled = false;
+            messageInput.disabled = false;
+            return;
+        }
 
         // --- FIX: Link #1 - Select the correct AI ---
         const isDocumentChat = activeChat.has_document === true;
@@ -512,6 +526,10 @@ ${msg.content}`).join('\n\n')}`;
             const errorMsg = "Error: The AI for this mode is not configured. Please check API keys.";
             console.error(errorMsg);
             displayMessage(errorMsg, 'ai');
+            // Reset UI
+            sendButton.innerHTML = originalButtonContent;
+            sendButton.disabled = false;
+            messageInput.disabled = false;
             return;
         }
 
@@ -556,7 +574,14 @@ ${msg.content}`).join('\n\n')}`;
             tempMessageWrapper?.remove();
             const errorMessage = `${i18n.t('app_error')} ${error instanceof Error ? error.message : 'Unknown error'}`;
             await addMessageToActiveChat({ sender: 'ai', content: errorMessage });
-            speakText(errorMessage);
+            // Error messages won't autoplay - user can click speak button if needed
+        } finally {
+            // Always reset UI state
+            const sendButton = document.getElementById('send-button') as HTMLButtonElement;
+            const originalButtonContent = `<svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>`;
+            sendButton.innerHTML = originalButtonContent;
+            sendButton.disabled = false;
+            messageInput.disabled = false;
         }
     }
 

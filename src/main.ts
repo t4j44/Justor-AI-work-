@@ -1,5 +1,6 @@
 // src/main.ts
 import './style.css'
+import { shouldShowIntro, mountIntroOverlay } from './components/introOverlay';
 import { supabase } from './supabaseClient';
 import { auth } from './auth';
 import { renderNavbar } from './components/navbar';
@@ -57,6 +58,11 @@ supabase.auth.onAuthStateChange((_event, session) => {
 });
 
 document.addEventListener('DOMContentLoaded', async () => {
+  // Show intro overlay once per session
+  if (shouldShowIntro()) {
+    await mountIntroOverlay();
+  }
+
   const { data: { session } } = await supabase.auth.getSession();
   auth.setSession(session);
   

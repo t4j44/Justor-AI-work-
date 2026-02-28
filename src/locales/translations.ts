@@ -9,14 +9,21 @@ export const translations = {
     nav_signUp: { en: 'Sign Up Free', bn: 'বিনামূল্যে সাইন আপ' },
 
     // --- Landing Page ---
-    landing_heroTitle_1: { en: 'Justor AI', bn: 'জাস্টর এআই' },
-    landing_heroTitle_2: { en: 'Your Rights. Your Voice. Your AI.', bn: 'আপনার অধিকার। আপনার কণ্ঠ। আপনার এআই।' },
-    landing_heroSubtitle: { en: `Get instant, clear answers to your legal questions. Whether you're a citizen, a law student, or a legal professional, Justor AI simplifies complexity—empowering you with the knowledge to defend your rights and make confident, informed decisions.`, bn: 'আপনার আইনি জিজ্ঞাসার তাৎক্ষণিক ও সুস্পষ্ট উত্তর পান। নাগরিক, আইনের ছাত্র বা আইন পেশাজীবী, সকলের জন্য Justor AI আইনি জটিলতাকে সহজ করে তোলে—আপনার অধিকার রক্ষা এবং আত্মবিশ্বাসী, জ্ঞানভিত্তিক সিদ্ধান্ত নেওয়ার জন্য আপনাকে সক্ষম করে তোলে।' },
+    landing_heroTitle_1: { en: 'Your Rights. Your Voice.', bn: 'আপনার অধিকার। আপনার কণ্ঠ।' },
+    landing_heroTitle_2: { en: 'Your AI.', bn: 'আপনার এআই।' },
+    landing_heroSubtitle: { en: `One who brings justice by Navigating Bangladeshi Law`, bn: 'যিনি বাংলাদেশের আইন দিয়ে ন্যায়বিচার নিয়ে আসেন' },
+    landing_heroDescription: { en: `Get instant, clear answers to your legal questions. Whether you're a citizen, a law student, or a legal professional, <strong>Justor AI</strong> simplifies complexity — empowering you with the knowledge to stand for your rights and make informed decisions.`, bn: 'আপনার আইনি প্রশ্নের তাৎক্ষণিক, স্পষ্ট উত্তর পান। আপনি একজন নাগরিক, আইনের শিক্ষার্থী বা আইন পেশাজীবী হোন না কেন, <strong>জাস্টর এআই</strong> জটিলতাকে সরল করে - আপনার অধিকারের পক্ষে দাঁড়াতে এবং অবগত সিদ্ধান্ত নিতে আপনাকে জ্ঞান দিয়ে ক্ষমতায়ন করে।' },
     landing_cta_guest: { en: 'Try as Guest', bn: 'অতিথি হিসেবে দেখুন' },
     landing_cta_signup: { en: 'Sign Up for Full Features', bn: 'সম্পূর্ণ সুবিধা পেতে সাইন আপ করুন' },
+    landing_poweredBy: { en: 'Powered by Advanced AI', bn: 'উন্নত এআই দ্বারা চালিত' },
     landing_cta_goToApp: { en: 'Go to App', bn: 'অ্যাপে যান' },
-    landing_featuresTitle: { en: 'A Tailored Experience for Everyone', bn: 'প্রত্যেকের জন্য বিশেষভাবে তৈরি' },
-    landing_featuresSubtitle: { en: 'Justor AI understands your needs and adapts its responses to provide the most relevant and useful information for your role.', bn: 'Justor AI আপনার প্রয়োজন অনুযায়ী সবচেয়ে প্রাসঙ্গিক ও কার্যকরী তথ্য প্রদানের জন্য নিজেকে মানিয়ে নিতে সক্ষম।' },
+    landing_tryTheseBtn: { en: '👉 Try These', bn: '👉 এগুলো চেষ্টা করুন' },
+    landing_exampleQuestionsTitle: { en: 'Example Questions', bn: 'উদাহরণ প্রশ্ন' },
+    landing_exampleQuestionsSubtitle: { en: 'Get started with these common legal questions', bn: 'এই সাধারণ আইনি প্রশ্নগুলি দিয়ে শুরু করুন' },
+    landing_finalCtaTitle: { en: 'Ready to Get Started?', bn: 'শুরু করতে প্রস্তুত?' },
+    landing_finalCtaSubtitle: { en: 'Join to be a part of a change with Justor AI', bn: 'জাস্টর এআই এর সাথে পরিবর্তনের অংশীদার হন' },
+    landing_featuresTitle: { en: 'A Tailored Experience for Everyone', bn: 'প্রত্যেকের জন্য বিশেষ অভিজ্ঞতা' },
+    landing_featuresSubtitle: { en: 'Justor AI understands your needs and adapts its responses to provide the most relevant and useful information for your role.', bn: 'জাস্টর এআই আপনার প্রয়োজনীয়তা বোঝে এবং আপনার ভূমিকার জন্য সবচেয়ে প্রাসঙ্গিক এবং দরকারী তথ্য প্রদান করতে তার প্রতিক্রিয়া মানিয়ে নেয়।' },
     landing_feature1_title: { en: 'For the General Public', bn: 'সাধারণ মানুষের জন্য' },
     landing_feature1_text: { en: 'Get straightforward, jargon-free answers to everyday legal issues. Understand your rights and receive clear, step-by-step guidance on what to do next.', bn: 'দৈনন্দিন আইনি বিষয়ে সহজবোধ্য ও পরিভাষামুক্ত উত্তর নিন। আপনার অধিকার সম্পর্কে জানুন এবং পরবর্তী করণীয় সম্পর্কে সুস্পষ্ট নির্দেশনা পান।' },
     landing_feature2_title: { en: 'For Law Students', bn: 'আইনের শিক্ষার্থীদের জন্য' },
@@ -100,4 +107,13 @@ export const translations = {
     login_page_linkSignIn: { en: 'Sign In', bn: 'সাইন ইন করুন' },
     login_page_confirmEmail: { en: 'Please check your email to confirm your account.', bn: 'আপনার অ্যাকাউন্ট নিশ্চিত করতে দয়া করে আপনার ইমেইল চেক করুন।' },
     login_page_fullNameLabel: { en: 'Full Name', bn: 'সম্পূর্ণ নাম' },
+    
+    // Footer
+    footer_contact: { en: 'Contact', bn: 'যোগাযোগ' },
+    
+    // About Page - Contact Section
+    about_contactTitle: { en: 'Get in Touch', bn: 'যোগাযোগ করুন' },
+    about_contactSubtitle: { en: 'Have questions or feedback? We\'d love to hear from you.', bn: 'প্রশ্ন বা মতামত আছে? আমরা আপনার কাছ থেকে শুনতে চাই।' },
+    about_contactEmail: { en: 'Email', bn: 'ইমেইল' },
+    about_contactWhatsapp: { en: 'WhatsApp', bn: 'হোয়াটসঅ্যাপ' },
 };
