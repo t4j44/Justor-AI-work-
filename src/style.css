@@ -4,7 +4,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 /* =============================================
-   INTRO OVERLAY
+   INTRO OVERLAY — Fully Responsive
    ============================================= */
 #intro-overlay {
   position: fixed;
@@ -15,6 +15,13 @@
   align-items: center;
   justify-content: center;
   transition: opacity 0.3s ease;
+  /* Prevent overscroll / pull-to-refresh on mobile */
+  touch-action: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  /* Safe area for notched phones */
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 #intro-overlay.intro-fade-out {
   opacity: 0;
@@ -27,16 +34,18 @@
   width: 100%;
   height: 100%;
   display: block;
+  /* GPU acceleration for smoother rendering */
+  will-change: contents;
 }
 
-/* Loading spinner */
+/* Loading spinner — responsive sizing */
 #intro-loader {
   position: absolute;
   z-index: 2;
 }
 .intro-spinner {
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   border: 3px solid rgba(124, 58, 237, 0.25);
   border-top-color: #7C3AED;
   border-radius: 50%;
@@ -46,7 +55,7 @@
   to { transform: rotate(360deg); }
 }
 
-/* Enter button */
+/* Enter button (kept for potential future use, hidden by default) */
 #intro-enter-btn {
   position: absolute;
   z-index: 3;
@@ -71,27 +80,38 @@
   box-shadow: 0 6px 32px rgba(124, 58, 237, 0.6);
 }
 
-/* Skip button */
+/* Skip button — touch-friendly, responsive */
 #intro-skip-btn {
   position: absolute;
   z-index: 3;
-  top: 24px;
-  right: 28px;
-  padding: 8px 22px;
+  top: 20px;
+  right: 20px;
+  /* Minimum 44x44 touch target (WCAG) */
+  min-width: 44px;
+  min-height: 44px;
+  padding: 10px 22px;
   font-family: 'Inter', sans-serif;
   font-size: 0.85rem;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.6);
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 30px;
   cursor: pointer;
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   transition: color 0.2s, background 0.2s;
+  /* Safe area for notched phones */
+  top: max(20px, env(safe-area-inset-top, 20px));
+  right: max(20px, env(safe-area-inset-right, 20px));
 }
 #intro-skip-btn:hover {
   color: #fff;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.2);
+}
+#intro-skip-btn:active {
+  transform: scale(0.95);
+  background: rgba(255, 255, 255, 0.25);
 }
 
 /* --- COLOR & THEME VARIABLES --- */
@@ -2021,13 +2041,13 @@ body.mobile-nav-open {
         z-index: 200;
         box-shadow: 4px 0px 15px rgba(0, 0, 0, 0.1);
         border-right: none;
-        transition: transform 0.3s ease-in-out;
-        display: none;
+        transition: transform 0.3s ease-in-out, visibility 0.3s;
+        visibility: hidden;
     }
 
     .sidebar.is-open {
         transform: translateX(0);
-        display: flex;
+        visibility: visible;
     }
 
     /* --- OVERLAY (for sidebar) --- */
@@ -2055,8 +2075,12 @@ body.mobile-nav-open {
         padding-top: 64px;
     }
 
+    .app-layout {
+        height: calc(100vh - 64px);
+    }
+
     .main-content {
-        padding-top: 64px;
+        padding-top: 0;
     }
 
     /* --- LANDING HERO ADJUSTMENTS --- */
@@ -2348,8 +2372,12 @@ body.mobile-nav-open {
         padding-top: 56px;
     }
 
+    .app-layout {
+        height: calc(100vh - 56px);
+    }
+
     .main-content {
-        padding-top: 56px;
+        padding-top: 0;
     }
 
     .mobile-nav-drawer {
@@ -4142,4 +4170,723 @@ body.mobile-nav-open {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+/* ======================================================== */
+/* --- COMPREHENSIVE RESPONSIVE ENHANCEMENTS ---            */
+/* ======================================================== */
+
+/* Prevent horizontal overflow globally */
+html,
+body {
+    overflow-x: hidden;
+    max-width: 100vw;
+}
+
+/* --- LARGE DESKTOP (1440px+) --- */
+@media (min-width: 1440px) {
+    .navbar {
+        padding: 0 8%;
+    }
+
+    .hero-content {
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
+    .features-section,
+    .example-questions-section {
+        max-width: 1300px;
+    }
+
+    #chat-window {
+        max-width: 1000px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .message-form-container {
+        max-width: 900px;
+    }
+
+    .footer-content {
+        max-width: 1300px;
+    }
+
+    .inv-about-page {
+        max-width: 1300px;
+    }
+
+    .message-wrapper {
+        max-width: 75%;
+    }
+}
+
+/* --- TABLET LANDSCAPE (901px - 1200px) --- */
+@media (min-width: 901px) and (max-width: 1200px) {
+    .navbar {
+        padding: 0 3%;
+    }
+
+    .navbar-right {
+        gap: 20px;
+    }
+
+    .nav-links {
+        gap: 20px;
+    }
+
+    .nav-buttons {
+        gap: 8px;
+    }
+
+    .nav-button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .hero-content h1 {
+        font-size: clamp(2.5rem, 5vw, 3.5rem);
+    }
+
+    .features-grid {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .inv-hero__pillars {
+        gap: 20px;
+    }
+
+    .inv-team-grid,
+    .inv-persona-grid,
+    .inv-stats-grid {
+        gap: 20px;
+    }
+
+    .sidebar {
+        width: 250px;
+    }
+
+    .message-wrapper {
+        max-width: 80%;
+    }
+}
+
+/* --- TABLET PORTRAIT (601px - 900px) --- */
+@media (min-width: 601px) and (max-width: 900px) {
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 20px;
+    }
+
+    .example-questions-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 20px;
+    }
+
+    .inv-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .inv-persona-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .inv-team-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .inv-roadmap-timeline {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .contact-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .about-grid.two-cols {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .about-grid.three-cols {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .inv-hero__pillars {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .inv-advantage-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .cta-buttons {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .cta-button {
+        width: auto;
+        max-width: none;
+    }
+
+    .sidebar {
+        width: 300px;
+    }
+
+    .hero-section {
+        padding: 40px 24px;
+        padding-top: 80px;
+    }
+
+    .footer-links {
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    .inv-market-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Show message wrapper wider on tablets */
+    .message-wrapper {
+        max-width: 85%;
+    }
+
+    /* Suggested queries 2 columns on tablets */
+    .suggested-queries-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* --- MOBILE ENHANCEMENTS (max-width: 900px) --- */
+@media (max-width: 900px) {
+    /* Follow-up questions fix */
+    .follow-up-container {
+        margin-left: 0;
+        max-width: 100%;
+        padding: 0 4px;
+    }
+
+    .follow-up-question {
+        font-size: 13px;
+        padding: 10px 14px;
+    }
+
+    /* Touch target improvements - minimum 44px */
+    .nav-button,
+    .cta-button,
+    .mic-btn,
+    .upload-btn,
+    #send-button,
+    .speak-btn,
+    .action-btn {
+        min-width: 44px;
+        min-height: 44px;
+    }
+
+    /* Prevent text overflow in messages */
+    .message-bubble {
+        overflow-wrap: break-word;
+        word-break: break-word;
+        hyphens: auto;
+    }
+
+    /* Better code block handling in messages */
+    .message-bubble pre,
+    .message-bubble code {
+        max-width: 100%;
+        overflow-x: auto;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+
+    /* Improved empty chat on mobile */
+    .empty-chat-container h2 {
+        font-size: 1.25rem;
+    }
+
+    /* Profile page improvements */
+    .page-container .login-form {
+        margin: 0 auto;
+    }
+
+    /* Prevent body scroll when sidebar is open */
+    body.sidebar-open {
+        overflow: hidden;
+    }
+
+    /* Suggested query items touch-friendly */
+    .suggested-query-item {
+        padding: 18px 16px;
+        font-size: 14px;
+    }
+
+    /* Message controls */
+    .message-controls {
+        gap: 6px;
+    }
+
+    /* Login page responsive */
+    .login-form p {
+        font-size: 0.9rem;
+    }
+
+    .google-signin {
+        font-size: 14px;
+        padding: 12px 16px;
+    }
+
+    /* Better section spacing on mobile */
+    .inv-section {
+        margin-bottom: 48px;
+    }
+
+    .inv-section__header {
+        margin-bottom: 32px;
+    }
+
+    /* FAQ mobile improvements */
+    .faq-answer p {
+        font-size: 0.9rem;
+    }
+
+    /* Intro overlay mobile — touch-friendly */
+    #intro-enter-btn {
+        padding: 12px 40px;
+        font-size: 1rem;
+        bottom: 10%;
+    }
+
+    #intro-skip-btn {
+        top: max(12px, env(safe-area-inset-top, 12px));
+        right: max(12px, env(safe-area-inset-right, 12px));
+        padding: 10px 20px;
+        font-size: 0.85rem;
+        min-width: 48px;
+        min-height: 48px;
+    }
+
+    .intro-spinner {
+        width: 32px;
+        height: 32px;
+        border-width: 2px;
+    }
+
+    /* Conversation list text truncation */
+    .conversation-title-area span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 150px;
+        display: inline-block;
+    }
+
+    /* Better sidebar role selector on mobile */
+    .sidebar-role-selector select {
+        font-size: 15px;
+        padding: 10px 12px;
+    }
+}
+
+/* --- SMALL PHONE ENHANCEMENTS (max-width: 480px) --- */
+@media (max-width: 480px) {
+    /* Better touch targets on very small screens */
+    .new-chat-btn {
+        padding: 14px;
+        font-size: 15px;
+    }
+
+    .conversation-item {
+        padding: 12px 8px;
+    }
+
+    /* Message bubble compact */
+    .message-bubble {
+        padding: 12px 14px;
+        font-size: 14px;
+    }
+
+    .message-wrapper {
+        max-width: 92%;
+    }
+
+    /* Smaller avatars on small screens */
+    .avatar {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+    }
+
+    /* Follow-up questions */
+    .follow-up-container {
+        gap: 8px;
+    }
+
+    .follow-up-question {
+        font-size: 12px;
+        padding: 8px 12px;
+        border-radius: 12px;
+    }
+
+    /* Empty chat */
+    .empty-chat-container h2 {
+        font-size: 1.1rem;
+    }
+
+    .suggested-query-item {
+        padding: 14px 12px;
+        font-size: 13px;
+        border-radius: 10px;
+    }
+
+    /* Hero section final squish */
+    .hero-subtitle {
+        font-size: clamp(0.95rem, 3vw, 1.1rem);
+    }
+
+    .hero-description {
+        font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+        line-height: 1.6;
+    }
+
+    /* Feature cards on small phones */
+    .feature-card {
+        padding: 24px 18px;
+    }
+
+    .feature-card h3 {
+        font-size: 1rem;
+    }
+
+    .feature-card p {
+        font-size: 0.85rem;
+    }
+
+    /* Example question cards */
+    .example-question-card {
+        padding: 20px 16px;
+    }
+
+    .question-icon {
+        font-size: 36px;
+    }
+
+    .example-question-card p {
+        font-size: 13px;
+    }
+
+    /* Final CTA */
+    .final-cta-gradient {
+        padding: 48px 16px;
+    }
+
+    .final-cta-gradient h2 {
+        font-size: clamp(1.5rem, 7vw, 2rem);
+    }
+
+    .final-cta-gradient p {
+        font-size: clamp(0.9rem, 3vw, 1.1rem) !important;
+    }
+
+    /* Footer compact */
+    .footer {
+        padding: 32px 12px;
+    }
+
+    .footer-copyright {
+        font-size: 0.85rem;
+    }
+
+    .footer-links a {
+        font-size: 0.85rem;
+    }
+
+    .social-label {
+        font-size: 0.85rem;
+    }
+
+    .social-link {
+        width: 36px;
+        height: 36px;
+    }
+
+    /* Login form compact */
+    .login-form {
+        border-radius: 10px;
+    }
+
+    .login-form h1 {
+        font-size: 1.3rem;
+    }
+
+    /* Contact cards */
+    .contact-card {
+        padding: 32px 20px;
+    }
+
+    .contact-card h3 {
+        font-size: 1.2rem;
+    }
+
+    .contact-link {
+        font-size: 0.95rem;
+    }
+
+    /* Beta notice */
+    .beta-notice {
+        padding: 20px 14px;
+    }
+
+    .beta-notice p {
+        font-size: 0.95rem;
+    }
+
+    /* Investor section tweaks */
+    .inv-section__title {
+        font-size: clamp(1.3rem, 5vw, 1.8rem);
+    }
+
+    .inv-section__intro {
+        font-size: 0.95rem;
+    }
+
+    .inv-section__eyebrow {
+        font-size: 0.7rem;
+        padding: 5px 12px;
+    }
+}
+
+/* --- VERY SMALL SCREENS (max-width: 360px) --- */
+@media (max-width: 360px) {
+    .navbar {
+        height: 52px;
+        padding: 0 8px;
+    }
+
+    #app {
+        padding-top: 52px;
+    }
+
+    .app-layout {
+        height: calc(100vh - 52px);
+    }
+
+    .main-content {
+        padding-top: 0;
+    }
+
+    .mobile-nav-drawer {
+        top: 52px;
+    }
+
+    .navbar-brand {
+        font-size: 16px;
+    }
+
+    .hero-content h1 {
+        font-size: 1.5rem;
+    }
+
+    .cta-button {
+        font-size: 14px;
+        padding: 12px 20px;
+    }
+
+    #message-input {
+        font-size: 15px;
+        padding: 10px 44px 10px 80px;
+    }
+
+    .message-bubble {
+        font-size: 13px;
+        padding: 10px 12px;
+    }
+
+    .hero-section {
+        padding-top: 60px;
+    }
+
+    .features-section {
+        padding: 40px 12px;
+    }
+
+    .example-questions-section {
+        padding: 40px 12px 60px;
+    }
+
+    .section-header h2 {
+        font-size: clamp(1.3rem, 5vw, 1.6rem);
+    }
+
+    .section-header p {
+        font-size: 13px;
+    }
+
+    .example-questions-section h2 {
+        font-size: clamp(1.5rem, 5vw, 1.8rem);
+    }
+
+    .login-form {
+        padding: 18px 14px;
+    }
+
+    .login-form h1 {
+        font-size: 1.2rem;
+    }
+}
+
+/* --- LANDSCAPE PHONE --- */
+@media (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
+    .hero-section {
+        min-height: auto;
+        padding: 20px 16px;
+        padding-top: 72px;
+    }
+
+    .hero-content h1 {
+        font-size: 1.8rem;
+        margin-bottom: 12px;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+        margin-bottom: 12px;
+    }
+
+    .hero-description {
+        margin-bottom: 20px;
+    }
+
+    .cta-buttons {
+        flex-direction: row;
+        gap: 12px;
+    }
+
+    .cta-button {
+        width: auto;
+        max-width: none;
+        padding: 10px 24px;
+    }
+
+    /* Keep message form relative in landscape */
+    .message-form-container {
+        position: relative;
+        bottom: auto;
+    }
+
+    #chat-window {
+        padding-bottom: 12px;
+    }
+
+    .final-cta-gradient {
+        padding: 40px 16px;
+    }
+
+    .features-section {
+        padding: 40px 16px;
+    }
+
+    .example-questions-section {
+        padding: 40px 16px 60px;
+    }
+}
+
+/* --- SAFE AREA INSETS (Notched phones) --- */
+@supports (padding: max(0px)) {
+    @media (max-width: 900px) {
+        .message-form-container {
+            padding-bottom: max(12px, env(safe-area-inset-bottom));
+        }
+
+        .mobile-nav-drawer__content {
+            padding-bottom: max(16px, env(safe-area-inset-bottom));
+        }
+
+        .footer {
+            padding-bottom: max(32px, calc(env(safe-area-inset-bottom) + 16px));
+        }
+
+        .navbar {
+            padding-left: max(12px, env(safe-area-inset-left));
+            padding-right: max(12px, env(safe-area-inset-right));
+        }
+    }
+}
+
+/* --- PRINT STYLES --- */
+@media print {
+    .navbar,
+    .sidebar,
+    .mobile-nav-toggle,
+    .mobile-nav-drawer,
+    .mobile-nav-overlay,
+    .message-form-container,
+    #particles-js,
+    #intro-overlay {
+        display: none !important;
+    }
+
+    #app {
+        padding-top: 0 !important;
+    }
+
+    .hero-section {
+        min-height: auto;
+        padding: 20px;
+    }
+
+    .message-wrapper {
+        max-width: 100%;
+    }
+
+    .app-layout {
+        height: auto;
+    }
+}
+
+/* --- REDUCED MOTION (Accessibility) --- */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    /* Instantly dismiss intro for users who prefer reduced motion */
+    #intro-overlay {
+        transition: none;
+    }
+
+    .intro-spinner {
+        animation: none;
+    }
+}
+
+/* --- HIGH CONTRAST MODE (Accessibility) --- */
+@media (prefers-contrast: high) {
+    .message-bubble {
+        border: 2px solid var(--text-primary);
+    }
+
+    .nav-link::after {
+        height: 3px;
+    }
+
+    .cta-button {
+        border-width: 3px;
+    }
+
+    .feature-card,
+    .example-question-card,
+    .contact-card {
+        border-width: 3px;
+    }
+
+    .nav-button {
+        border-width: 2px;
+    }
 }
